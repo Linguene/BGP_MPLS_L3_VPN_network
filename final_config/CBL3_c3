@@ -1,0 +1,185 @@
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-CBL3 vtysh
+
+Hello, this is FRRouting (version 9.0.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+CBL3# conf
+CBL3(config)# 
+CBL3(config)# router bgp 103
+CBL3(config-router)# no bgp ebgp-requires-policy 
+CBL3(config-router)# neighbor 10.0.51.1 remote-as 400
+CBL3(config-router)# network 172.16.3.0 mask 255.255.255.0
+CBL3(config-router)# end
+CBL3# 
+CBL3# 
+CBL3# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL3
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.51.2/30
+exit
+!
+interface eth2
+ ip address 172.16.3.1/24
+exit
+!
+interface lo
+ ip address 13.13.13.13/32
+exit
+!
+router bgp 103
+ no bgp ebgp-requires-policy
+ neighbor 10.0.51.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.3.0/24
+ exit-address-family
+exit
+!
+end
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# conf
+CBL3(config)# 
+CBL3(config)# router bgp 103
+CBL3(config-router)# neighbor 10.0.51.1 allowas-in
+CBL3(config-router)# end
+CBL3# 
+CBL3# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL3
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.51.2/30
+exit
+!
+interface eth2
+ ip address 172.16.3.1/24
+exit
+!
+interface lo
+ ip address 13.13.13.13/32
+exit
+!
+router bgp 103
+ no bgp ebgp-requires-policy
+ neighbor 10.0.51.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.3.0/24
+  neighbor 10.0.51.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL3# sh int br
+Interface       Status  VRF             Addresses
+---------       ------  ---             ---------
+eth0            up      default         172.20.20.4/24
+                                        + 2001:172:20:20::4/64
+eth1            up      default         10.0.51.2/30
+eth2            up      default         172.16.3.1/24
+lo              up      default         13.13.13.13/32
+
+CBL3# ping 10.0.51.1
+PING 10.0.51.1 (10.0.51.1): 56 data bytes
+64 bytes from 10.0.51.1: seq=0 ttl=64 time=0.064 ms
+64 bytes from 10.0.51.1: seq=1 ttl=64 time=0.137 ms
+^C
+--- 10.0.51.1 ping statistics ---
+2 packets transmitted, 2 packets received, 0% packet loss
+round-trip min/avg/max = 0.064/0.100/0.137 ms
+CBL3# clear ip bgp * soft
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL3
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.51.2/30
+exit
+!
+interface eth2
+ ip address 172.16.3.1/24
+exit
+!
+interface lo
+ ip address 13.13.13.13/32
+exit
+!
+router bgp 103
+ no bgp ebgp-requires-policy
+ neighbor 10.0.51.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.3.0/24
+  neighbor 10.0.51.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# 
+CBL3# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL3
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.51.2/30
+exit
+!
+interface eth2
+ ip address 172.16.3.1/24
+exit
+!
+interface lo
+ ip address 13.13.13.13/32
+exit
+!
+router bgp 103
+ no bgp ebgp-requires-policy
+ neighbor 10.0.51.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.3.0/24
+  neighbor 10.0.51.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL3# 

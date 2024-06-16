@@ -1,0 +1,1529 @@
+ ~/Labs/l3vpn  sudo containerlab deploy 
+INFO[0000] Containerlab v0.47.2 started                 
+INFO[0000] Parsing & checking topology file: l3vpn.clab.yml 
+INFO[0000] Creating docker network: Name="clab", IPv4Subnet="172.20.20.0/24", IPv6Subnet="2001:172:20:20::/64", MTU='ל' 
+INFO[0000] Creating lab directory: /home/iplabs/Labs/l3vpn/clab-l3vpn 
+INFO[0000] Creating container: "R5"                     
+INFO[0000] Creating container: "R3"                     
+INFO[0001] Creating container: "CBL3"                   
+INFO[0001] Creating container: "HB3"                    
+INFO[0002] Creating link: R5:eth2 <--> CBL3:eth1        
+INFO[0002] Creating container: "HR1"                    
+INFO[0002] Creating link: CBL3:eth2 <--> HB3:eth1       
+INFO[0002] Creating container: "R1"                     
+INFO[0003] Creating container: "HB2"                    
+INFO[0003] Creating link: R1:eth1 <--> R3:eth1          
+INFO[0003] Creating container: "R2"                     
+INFO[0003] Creating container: "HR3"                    
+INFO[0003] Creating link: R2:eth1 <--> R3:eth2          
+INFO[0004] Creating container: "CBL2"                   
+INFO[0004] Creating container: "CRL1"                   
+INFO[0004] Creating link: R2:eth2 <--> CBL2:eth1        
+INFO[0004] Creating link: CBL2:eth2 <--> HB2:eth1       
+INFO[0005] Creating container: "HB1"                    
+INFO[0005] Creating link: R1:eth3 <--> CRL1:eth1        
+INFO[0005] Creating link: CRL1:eth2 <--> HR1:eth1       
+INFO[0005] Creating container: "CRL3"                   
+INFO[0006] Creating container: "CBL1"                   
+INFO[0006] Creating link: R5:eth3 <--> CRL3:eth1        
+INFO[0006] Creating link: CRL3:eth2 <--> HR3:eth1       
+INFO[0006] Creating link: R1:eth2 <--> CBL1:eth1        
+INFO[0007] Creating container: "R4"                     
+INFO[0007] Creating link: CBL1:eth2 <--> HB1:eth1       
+INFO[0007] Creating link: R3:eth3 <--> R4:eth1          
+INFO[0007] Creating link: R4:eth2 <--> R5:eth1          
+INFO[0008] Adding containerlab host entries to /etc/hosts file 
+INFO[0008] Adding ssh config for containerlab nodes     
+INFO[0010] Executed command "ip addr add 172.16.2.200/24 dev eth1" on the node "HB2". stdout: 
+INFO[0010] Executed command "ip route replace 0/0 via 172.16.2.1" on the node "HB2". stdout: 
+INFO[0010] Executed command "ip addr add 172.16.1.200/24 dev eth1" on the node "HB1". stdout: 
+INFO[0010] Executed command "ip route replace 0/0 via 172.16.1.1" on the node "HB1". stdout: 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.lo.input=1" on the node "R2". stdout:
+net.mpls.conf.lo.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth1.input=1" on the node "R2". stdout:
+net.mpls.conf.eth1.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.platform_labels=1048575" on the node "R2". stdout:
+net.mpls.platform_labels = 1048575 
+INFO[0010] Executed command "ip link add blue type vrf table 1" on the node "R2". stdout: 
+INFO[0010] Executed command "ip link set eth2 vrf blue" on the node "R2". stdout: 
+INFO[0010] Executed command "ip link set blue up" on the node "R2". stdout: 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.lo.input=1" on the node "R5". stdout:
+net.mpls.conf.lo.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth1.input=1" on the node "R5". stdout:
+net.mpls.conf.eth1.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.platform_labels=1048575" on the node "R5". stdout:
+net.mpls.platform_labels = 1048575 
+INFO[0010] Executed command "ip link add blue type vrf table 1" on the node "R5". stdout: 
+INFO[0010] Executed command "ip link add red type vrf table 2" on the node "R5". stdout: 
+INFO[0010] Executed command "ip link set eth2 vrf blue" on the node "R5". stdout: 
+INFO[0010] Executed command "ip link set eth3 vrf red" on the node "R5". stdout: 
+INFO[0010] Executed command "ip link set blue up" on the node "R5". stdout: 
+INFO[0010] Executed command "ip link set red up" on the node "R5". stdout: 
+INFO[0010] Executed command "ip addr add 172.16.3.200/24 dev eth1" on the node "HB3". stdout: 
+INFO[0010] Executed command "ip route replace 0/0 via 172.16.3.1" on the node "HB3". stdout: 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.lo.input=1" on the node "R1". stdout:
+net.mpls.conf.lo.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth1.input=1" on the node "R1". stdout:
+net.mpls.conf.eth1.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.platform_labels=1048575" on the node "R1". stdout:
+net.mpls.platform_labels = 1048575 
+INFO[0010] Executed command "ip link add blue type vrf table 1" on the node "R1". stdout: 
+INFO[0010] Executed command "ip link add red type vrf table 2" on the node "R1". stdout: 
+INFO[0010] Executed command "ip link set eth2 vrf blue" on the node "R1". stdout: 
+INFO[0010] Executed command "ip link set eth3 vrf red" on the node "R1". stdout: 
+INFO[0010] Executed command "ip link set blue up" on the node "R1". stdout: 
+INFO[0010] Executed command "ip link set red up" on the node "R1". stdout: 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.lo.input=1" on the node "R3". stdout:
+net.mpls.conf.lo.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth1.input=1" on the node "R3". stdout:
+net.mpls.conf.eth1.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth2.input=1" on the node "R3". stdout:
+net.mpls.conf.eth2.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth3.input=1" on the node "R3". stdout:
+net.mpls.conf.eth3.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.platform_labels=1048575" on the node "R3". stdout:
+net.mpls.platform_labels = 1048575 
+INFO[0010] Executed command "ip addr add 172.16.3.200/24 dev eth1" on the node "HR3". stdout: 
+INFO[0010] Executed command "ip route replace 0/0 via 172.16.3.1" on the node "HR3". stdout: 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.lo.input=1" on the node "R4". stdout:
+net.mpls.conf.lo.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth1.input=1" on the node "R4". stdout:
+net.mpls.conf.eth1.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.conf.eth2.input=1" on the node "R4". stdout:
+net.mpls.conf.eth2.input = 1 
+INFO[0010] Executed command "sysctl -w net.mpls.platform_labels=1048575" on the node "R4". stdout:
+net.mpls.platform_labels = 1048575 
+INFO[0010] Executed command "ip addr add 172.16.1.200/24 dev eth1" on the node "HR1". stdout: 
+INFO[0010] Executed command "ip route replace 0/0 via 172.16.1.1" on the node "HR1". stdout: 
+INFO[0010] 🎉 New containerlab version 0.49.0 is available! Release notes: https://containerlab.dev/rn/0.49/
+Run 'containerlab version upgrade' to upgrade or go check other installation options at https://containerlab.dev/install/ 
++----+-----------------+--------------+-------+-------+---------+-----------------+-----------------------+
+| #  |      Name       | Container ID | Image | Kind  |  State  |  IPv4 Address   |     IPv6 Address      |
++----+-----------------+--------------+-------+-------+---------+-----------------+-----------------------+
+|  1 | clab-l3vpn-CBL1 | cda01be3d322 | frr   | linux | running | 172.20.20.15/24 | 2001:172:20:20::f/64  |
+|  2 | clab-l3vpn-CBL2 | 8cba3572b704 | frr   | linux | running | 172.20.20.11/24 | 2001:172:20:20::b/64  |
+|  3 | clab-l3vpn-CBL3 | a52e1564a92d | frr   | linux | running | 172.20.20.4/24  | 2001:172:20:20::4/64  |
+|  4 | clab-l3vpn-CRL1 | 41699abdcea3 | frr   | linux | running | 172.20.20.12/24 | 2001:172:20:20::c/64  |
+|  5 | clab-l3vpn-CRL3 | adb4c16ae720 | frr   | linux | running | 172.20.20.14/24 | 2001:172:20:20::e/64  |
+|  6 | clab-l3vpn-HB1  | 07cb3709630f | vpc   | linux | running | 172.20.20.13/24 | 2001:172:20:20::d/64  |
+|  7 | clab-l3vpn-HB2  | 928a13d5e87c | vpc   | linux | running | 172.20.20.8/24  | 2001:172:20:20::8/64  |
+|  8 | clab-l3vpn-HB3  | 24a0c62d5f71 | vpc   | linux | running | 172.20.20.5/24  | 2001:172:20:20::5/64  |
+|  9 | clab-l3vpn-HR1  | 3bffe2d755c3 | vpc   | linux | running | 172.20.20.6/24  | 2001:172:20:20::6/64  |
+| 10 | clab-l3vpn-HR3  | ddfb9dad8e7d | vpc   | linux | running | 172.20.20.10/24 | 2001:172:20:20::a/64  |
+| 11 | clab-l3vpn-R1   | 9eda7becb55c | frr   | linux | running | 172.20.20.7/24  | 2001:172:20:20::7/64  |
+| 12 | clab-l3vpn-R2   | 346416dcbfd7 | frr   | linux | running | 172.20.20.9/24  | 2001:172:20:20::9/64  |
+| 13 | clab-l3vpn-R3   | ca492e988433 | frr   | linux | running | 172.20.20.3/24  | 2001:172:20:20::3/64  |
+| 14 | clab-l3vpn-R4   | bc8ebefa238d | frr   | linux | running | 172.20.20.16/24 | 2001:172:20:20::10/64 |
+| 15 | clab-l3vpn-R5   | a2bb8fc493b2 | frr   | linux | running | 172.20.20.2/24  | 2001:172:20:20::2/64  |
++----+-----------------+--------------+-------+-------+---------+-----------------+-----------------------+
+ ~/Labs/l3vpn  docker exec -it clab-bgp2-R2 vtysh     
+Error: No such container: clab-bgp2-R2
+ ✘  ~/Labs/l3vpn  docker exec -it clab-l3vpn-R2 vtysh
+
+Hello, this is FRRouting (version 9.0.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+R2# sh int br
+Interface       Status  VRF             Addresses
+---------       ------  ---             ---------
+blue            up      blue            
+eth2            up      blue            10.0.21.1/30
+
+Interface       Status  VRF             Addresses
+---------       ------  ---             ---------
+eth0            up      default         172.20.20.9/24
+                                        + 2001:172:20:20::9/64
+eth1            up      default         20.0.23.1/30
+lo              up      default         2.2.2.2/32
+
+R2# 
+R2# 
+R2# sh ip route ospf
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+O>* 1.1.1.1/32 [110/20] via 20.0.23.2, eth1, weight 1, 00:39:57
+O   2.2.2.2/32 [110/0] is directly connected, lo, weight 1, 00:40:51
+O>* 3.3.3.3/32 [110/10] via 20.0.23.2, eth1, weight 1, 00:39:57
+O>* 4.4.4.4/32 [110/20] via 20.0.23.2, eth1, weight 1, 00:39:57
+O>* 5.5.5.5/32 [110/30] via 20.0.23.2, eth1, weight 1, 00:39:57
+O>* 20.0.13.0/30 [110/20] via 20.0.23.2, eth1, weight 1, 00:39:57
+O   20.0.23.0/30 [110/10] is directly connected, eth1, weight 1, 00:40:51
+O>* 20.0.34.0/30 [110/20] via 20.0.23.2, eth1, weight 1, 00:39:57
+O>* 20.0.45.0/30 [110/30] via 20.0.23.2, eth1, weight 1, 00:39:57
+R2# 
+R2# sh ip ospf database
+
+       OSPF Router with ID (2.2.2.2)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum  Link count
+2.2.2.2        2.2.2.2          797 0x80000005 0xa71d 2
+3.3.3.3        3.3.3.3          781 0x8000000d 0x8c3c 4
+4.4.4.4        4.4.4.4          815 0x80000008 0x678c 3
+172.20.20.2    172.20.20.2      813 0x80000005 0xc627 2
+172.20.20.7    172.20.20.7      780 0x80000005 0x88ad 2
+
+                Net Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum
+20.0.13.1      172.20.20.7      820 0x80000002 0x5026
+20.0.23.2      3.3.3.3          781 0x80000002 0xd638
+20.0.34.2      4.4.4.4          825 0x80000002 0x9364
+20.0.45.2      172.20.20.2      823 0x80000002 0x1e3d
+
+
+R2# conf
+R2(config)# 
+R2(config)# mpls ldp
+R2(config-ldp)# 
+  address-family   Configure Address Family and its parameters
+  discovery        Configure discovery parameters
+  dual-stack       Configure dual stack parameters
+  end              End current mode and change to enable mode
+  exit             Exit current mode and down to previous mode
+  find             Find CLI command matching a regular expression
+  install          install lsps
+  list             Print command list
+  neighbor         Configure neighbor parameters
+  no               Negate a command or set its defaults
+  ordered-control  Configure LDP ordered label distribution control mode
+  output           Direct vtysh output to file
+  quit             Exit current mode and down to previous mode
+  router-id        Configure router Id
+  wait-for-sync    Time to wait for LDP-IGP Sync to complete label exchange
+R2(config-ldp)# address-family 
+  ipv4  IPv4
+  ipv6  IPv6
+R2(config-ldp)# address-family ipv4 
+  <cr>  
+R2(config-ldp)# address-family ipv4 
+R2(config-ldp-af)# 
+  discovery            Configure discovery parameters
+  end                  End current mode and change to enable mode
+  exit                 Exit current mode and down to previous mode
+  exit-address-family  Exit from Address Family configuration mode
+  find                 Find CLI command matching a regular expression
+  interface            Enable LDP on an interface and enter interface submode
+  label                Configure label control and policies
+  list                 Print command list
+  neighbor             Configure neighbor parameters
+  no                   Negate a command or set its defaults
+  output               Direct vtysh output to file
+  quit                 Exit current mode and down to previous mode
+  session              Configure session parameters
+  ttl-security         LDP ttl security check
+R2(config-ldp-af)# discovery 
+  hello              LDP Link Hellos
+  targeted-hello     LDP Targeted Hellos
+  transport-address  Specify transport address for TCP connection
+R2(config-ldp-af)# discovery transport-address 
+  A.B.C.D  IP address to be used as transport address
+R2(config-ldp-af)# exit                        
+R2(config-ldp)# router-id 2.2.2.2
+R2(config-ldp)# address-family ipv4
+R2(config-ldp-af)# discovery transport-address 2.2.2.2
+R2(config-ldp-af)# interface eth1
+R2(config-ldp-af-if)# exit
+R2(config-ldp-af)# exit
+R2(config-ldp)# exit
+R2(config)# end
+R2# 
+R2# 
+R2# sh mpls ldp neighbor 
+AF   ID              State       Remote Address    Uptime
+ipv4 3.3.3.3         OPERATIONAL 3.3.3.3         00:01:55
+R2# 
+R2# sh mpls ldp
+% Command incomplete: sh mpls ldp
+R2# sh mpls ldp neighbor 
+AF   ID              State       Remote Address    Uptime
+ipv4 3.3.3.3         OPERATIONAL 3.3.3.3         00:02:11
+R2# exit
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-R2      
+"docker exec" requires at least 2 arguments.
+See 'docker exec --help'.
+
+Usage:  docker exec [OPTIONS] CONTAINER COMMAND [ARG...]
+
+Run a command in a running container
+ ✘  ~/Labs/l3vpn  docker exec -it clab-l3vpn-R2 /bin/bash
+R2:/# ping -l 5.5.5.5
+ping: unrecognized option: l
+BusyBox v1.36.1 (2023-07-27 17:12:24 UTC) multi-call binary.
+
+Usage: ping [OPTIONS] HOST
+
+Send ICMP ECHO_REQUESTs to HOST
+
+        -4,-6           Force IP or IPv6 name resolution
+        -c CNT          Send only CNT pings
+        -s SIZE         Send SIZE data bytes in packets (default 56)
+        -i SECS         Interval
+        -A              Ping as soon as reply is received
+        -t TTL          Set TTL
+        -I IFACE/IP     Source interface or IP address
+        -W SEC          Seconds to wait for the first response (default 10)
+                        (after all -c CNT packets are sent)
+        -w SEC          Seconds until ping exits (default:infinite)
+                        (can exit earlier with -c CNT)
+        -q              Quiet, only display output at start/finish
+        -p HEXBYTE      Payload pattern
+R2:/# ping 5.5.5.5 -l
+ping: unrecognized option: l
+BusyBox v1.36.1 (2023-07-27 17:12:24 UTC) multi-call binary.
+
+Usage: ping [OPTIONS] HOST
+
+Send ICMP ECHO_REQUESTs to HOST
+
+        -4,-6           Force IP or IPv6 name resolution
+        -c CNT          Send only CNT pings
+        -s SIZE         Send SIZE data bytes in packets (default 56)
+        -i SECS         Interval
+        -A              Ping as soon as reply is received
+        -t TTL          Set TTL
+        -I IFACE/IP     Source interface or IP address
+        -W SEC          Seconds to wait for the first response (default 10)
+                        (after all -c CNT packets are sent)
+        -w SEC          Seconds until ping exits (default:infinite)
+                        (can exit earlier with -c CNT)
+        -q              Quiet, only display output at start/finish
+        -p HEXBYTE      Payload pattern
+R2:/# ping -I 2.2.2.2 5.5.5.5
+PING 5.5.5.5 (5.5.5.5) from 2.2.2.2: 56 data bytes
+64 bytes from 5.5.5.5: seq=0 ttl=62 time=0.095 ms
+64 bytes from 5.5.5.5: seq=1 ttl=62 time=0.066 ms
+64 bytes from 5.5.5.5: seq=2 ttl=62 time=0.096 ms
+64 bytes from 5.5.5.5: seq=3 ttl=62 time=0.164 ms
+64 bytes from 5.5.5.5: seq=4 ttl=62 time=0.185 ms
+64 bytes from 5.5.5.5: seq=5 ttl=62 time=0.166 ms
+^C
+--- 5.5.5.5 ping statistics ---
+6 packets transmitted, 6 packets received, 0% packet loss
+round-trip min/avg/max = 0.066/0.128/0.185 ms
+R2:/# 
+R2:/# 
+R2:/# 
+R2:/# 
+R2:/# 
+R2:/# ping -I 2.2.2.2 5.5.5.5
+PING 5.5.5.5 (5.5.5.5) from 2.2.2.2: 56 data bytes
+64 bytes from 5.5.5.5: seq=0 ttl=62 time=0.115 ms
+64 bytes from 5.5.5.5: seq=1 ttl=62 time=0.106 ms
+64 bytes from 5.5.5.5: seq=2 ttl=62 time=0.078 ms
+64 bytes from 5.5.5.5: seq=3 ttl=62 time=0.128 ms
+64 bytes from 5.5.5.5: seq=4 ttl=62 time=0.087 ms
+64 bytes from 5.5.5.5: seq=5 ttl=62 time=0.082 ms
+64 bytes from 5.5.5.5: seq=6 ttl=62 time=0.073 ms
+64 bytes from 5.5.5.5: seq=7 ttl=62 time=0.275 ms
+64 bytes from 5.5.5.5: seq=8 ttl=62 time=0.068 ms
+64 bytes from 5.5.5.5: seq=9 ttl=62 time=0.077 ms
+64 bytes from 5.5.5.5: seq=10 ttl=62 time=0.076 ms
+64 bytes from 5.5.5.5: seq=11 ttl=62 time=0.189 ms
+64 bytes from 5.5.5.5: seq=12 ttl=62 time=0.074 ms
+64 bytes from 5.5.5.5: seq=13 ttl=62 time=0.194 ms
+64 bytes from 5.5.5.5: seq=14 ttl=62 time=0.070 ms
+64 bytes from 5.5.5.5: seq=15 ttl=62 time=0.103 ms
+64 bytes from 5.5.5.5: seq=16 ttl=62 time=0.121 ms
+64 bytes from 5.5.5.5: seq=17 ttl=62 time=0.183 ms
+64 bytes from 5.5.5.5: seq=18 ttl=62 time=0.073 ms
+64 bytes from 5.5.5.5: seq=19 ttl=62 time=0.189 ms
+64 bytes from 5.5.5.5: seq=20 ttl=62 time=0.069 ms
+64 bytes from 5.5.5.5: seq=21 ttl=62 time=0.194 ms
+64 bytes from 5.5.5.5: seq=22 ttl=62 time=0.189 ms
+64 bytes from 5.5.5.5: seq=23 ttl=62 time=0.189 ms
+64 bytes from 5.5.5.5: seq=24 ttl=62 time=0.202 ms
+64 bytes from 5.5.5.5: seq=25 ttl=62 time=0.289 ms
+64 bytes from 5.5.5.5: seq=26 ttl=62 time=0.077 ms
+64 bytes from 5.5.5.5: seq=27 ttl=62 time=0.106 ms
+64 bytes from 5.5.5.5: seq=28 ttl=62 time=0.075 ms
+64 bytes from 5.5.5.5: seq=29 ttl=62 time=0.185 ms
+64 bytes from 5.5.5.5: seq=30 ttl=62 time=0.073 ms
+64 bytes from 5.5.5.5: seq=31 ttl=62 time=0.187 ms
+64 bytes from 5.5.5.5: seq=32 ttl=62 time=0.185 ms
+64 bytes from 5.5.5.5: seq=33 ttl=62 time=0.656 ms
+64 bytes from 5.5.5.5: seq=34 ttl=62 time=0.186 ms
+64 bytes from 5.5.5.5: seq=35 ttl=62 time=0.180 ms
+64 bytes from 5.5.5.5: seq=36 ttl=62 time=0.067 ms
+64 bytes from 5.5.5.5: seq=37 ttl=62 time=0.162 ms
+64 bytes from 5.5.5.5: seq=38 ttl=62 time=0.074 ms
+64 bytes from 5.5.5.5: seq=39 ttl=62 time=0.118 ms
+64 bytes from 5.5.5.5: seq=40 ttl=62 time=0.076 ms
+64 bytes from 5.5.5.5: seq=41 ttl=62 time=0.066 ms
+64 bytes from 5.5.5.5: seq=42 ttl=62 time=0.069 ms
+64 bytes from 5.5.5.5: seq=43 ttl=62 time=0.072 ms
+64 bytes from 5.5.5.5: seq=44 ttl=62 time=0.102 ms
+64 bytes from 5.5.5.5: seq=45 ttl=62 time=0.100 ms
+64 bytes from 5.5.5.5: seq=46 ttl=62 time=0.107 ms
+64 bytes from 5.5.5.5: seq=47 ttl=62 time=0.093 ms
+64 bytes from 5.5.5.5: seq=48 ttl=62 time=0.074 ms
+64 bytes from 5.5.5.5: seq=49 ttl=62 time=0.076 ms
+64 bytes from 5.5.5.5: seq=50 ttl=62 time=0.073 ms
+64 bytes from 5.5.5.5: seq=51 ttl=62 time=0.078 ms
+64 bytes from 5.5.5.5: seq=52 ttl=62 time=0.118 ms
+64 bytes from 5.5.5.5: seq=53 ttl=62 time=0.073 ms
+64 bytes from 5.5.5.5: seq=54 ttl=62 time=0.073 ms
+64 bytes from 5.5.5.5: seq=55 ttl=62 time=0.103 ms
+64 bytes from 5.5.5.5: seq=56 ttl=62 time=0.072 ms
+^C
+--- 5.5.5.5 ping statistics ---
+57 packets transmitted, 57 packets received, 0% packet loss
+round-trip min/avg/max = 0.066/0.127/0.656 ms
+R2:/# exit
+exit
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-R2 vtysh    
+
+Hello, this is FRRouting (version 9.0.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+R2# conf
+R2(config)# 
+R2(config)# router bgp 400
+R2(config-router)# no bgp ebgp-requires-policy 
+R2(config-router)# neighbor 1.1.1.1 remote-as 400
+R2(config-router)# neighbor 1.1.1.1 update-source lo
+R2(config-router)# neighbor 1.1.1.1 next-hop-self
+R2(config-router)# neighbor 5.5.5.5 remote-as 400
+R2(config-router)# neighbor 5.5.5.5 update-source lo
+R2(config-router)# neighbor 5.5.5.5 next-hop-self
+R2(config-router)# address-family vpnv4   
+% There is no matched command.
+R2(config-router)# address-family       
+  ipv4   Address Family
+  ipv6   Address Family
+  l2vpn  Address Family
+R2(config-router)# address-family ipv4 
+  <cr>             
+  flowspec         Address Family modifier
+  labeled-unicast  Address Family modifier
+  multicast        Address Family modifier
+  unicast          Address Family modifier
+  vpn              Address Family modifier
+R2(config-router)# address-family ipv4 vpn
+R2(config-router-af)# neighbor 1.1.1.1 activate
+R2(config-router-af)# neighbor 5.5.5.5 
+  accept-own                  Enable handling of self-originated VPN routes containing ACCEPT_OWN community
+  activate                    Enable the Address Family for this Neighbor
+  addpath-tx-all-paths        Use addpath to advertise all paths to a neighbor
+  addpath-tx-bestpath-per-AS  Use addpath to advertise the bestpath per each neighboring AS
+  advertise-map               Route-map to conditionally advertise routes
+  allowas-in                  Accept as-path with my AS present in it
+  as-override                 Override ASNs in outbound updates if aspath equals remote-as
+  attribute-unchanged         BGP attribute is propagated unchanged to this neighbor
+  disable-addpath-rx          Do not accept additional paths
+  distribute-list             Filter updates to/from this neighbor
+  filter-list                 Establish BGP filters
+  maximum-prefix              Maximum number of prefix accept from this peer
+  maximum-prefix-out          Maximum number of prefixes to be sent to this peer
+  next-hop-self               Disable the next hop calculation for this neighbor
+  prefix-list                 Filter updates to/from this neighbor
+  remove-private-AS           Remove private ASNs in outbound updates
+  route-map                   Apply route map to neighbor
+  route-reflector-client      Configure a neighbor as Route Reflector client
+  route-server-client         Configure a neighbor as Route Server client
+  send-community              Send Community attribute to this neighbor
+  soft-reconfiguration        Per neighbor soft reconfiguration
+  soo                         Set the Site-of-Origin (SoO) extended community
+  unsuppress-map              Route-map to selectively unsuppress suppressed routes
+  weight                      Set default weight for routes from this neighbor
+R2(config-router-af)# neighbor 5.5.5.5 activate
+R2(config-router-af)# exit
+R2(config-router)# exit
+eR2(config)# exit
+R2# 
+R2# 
+R2# clear ip bgp * soft
+R2# 
+R2# 
+R2# 
+R2# 
+R2# 
+R2# sh ip bgp summary 
+
+IPv4 Unicast Summary (VRF default):
+BGP router identifier 2.2.2.2, local AS number 400 vrf-id 0
+BGP table version 0
+RIB entries 0, using 0 bytes of memory
+Peers 2, using 27 KiB of memory
+
+Neighbor        V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd   PfxSnt Desc
+1.1.1.1         4        400        13        14        0    0    0 00:01:51            0        0 N/A
+5.5.5.5         4        400        15        17        0    0    0 00:00:55            0        0 N/A
+
+Total number of neighbors 2
+
+IPv4 VPN Summary (VRF default):
+BGP router identifier 2.2.2.2, local AS number 400 vrf-id 0
+BGP table version 0
+RIB entries 0, using 0 bytes of memory
+Peers 2, using 27 KiB of memory
+
+Neighbor        V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd   PfxSnt Desc
+1.1.1.1         4        400        13        14        0    0    0 00:01:51            0        0 N/A
+5.5.5.5         4        400        15        17        0    0    0 00:00:55            0        0 N/A
+
+Total number of neighbors 2
+R2# 
+R2# 
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# conf
+R2(config)# 
+R2(config)# router bgp 400 vrf 
+  VIEWVRFNAME  View/VRF name
+     blue default 
+R2(config)# router bgp 400 vrf blue
+R2(config-router)# neighbor 10.0.21.2 remote-as 102
+R2(config-router)# no bgp ebgp-requires-policy 
+R2(config-router)# address-family ipv4 unicast 
+R2(config-router-af)# neighbor 10.0.21.2 activate 
+R2(config-router-af)# rd vpn export 400:102
+R2(config-router-af)# route-target vpn export 400:102
+R2(config-router-af)# route-target vpn import 400:101
+R2(config-router-af)# route-target vpn import 400:103
+R2(config-router-af)#           
+  aggregate-address    Configure BGP aggregate entries
+  bgp                  BGP Specific commands
+  distance             Define an administrative distance
+  end                  End current mode and change to enable mode
+  exit                 Exit current mode and down to previous mode
+  exit-address-family  Exit from Address Family configuration mode
+  export               Export routes from this address-family
+  find                 Find CLI command matching a regular expression
+  import               Import routes from another VRF
+  label                label value for VRF
+  list                 Print command list
+  maximum-paths        Forward packets over multiple paths
+  neighbor             Specify neighbor router
+  network              Specify a network to announce via BGP
+  nexthop              Specify next hop to use for VRF advertised prefixes
+  no                   Negate a command or set its defaults
+  output               Direct vtysh output to file
+  quit                 Exit current mode and down to previous mode
+  rd                   Specify route distinguisher
+  redistribute         Redistribute information from another routing protocol
+  route-map            Specify route map
+  route-target         Specify route target list
+  route-target6        Specify route target list
+  rt                   Specify route target list
+  rt6                  Specify route target list
+  sid                  sid value for VRF
+  table-map            BGP table to RIB route download filter
+R2(config-router-af)# export vpn
+R2(config-router-af)# import vpn
+R2(config-router-af)# label vpn 
+  export  For routes leaked from current address-family to vpn
+R2(config-router-af)# label vpn export 
+  (0-1048575)      Label Value <0-1048575>
+  allocation-mode  Label allocation mode
+  auto             Automatically assign a label
+R2(config-router-af)# label vpn export auto
+R2(config-router-af)# end
+R2# 
+R2# 
+R2# 
+R2# 
+R2# 
+R2# clear ip bgp * soft
+R2# 
+R2# 
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:102
+  rt vpn import 400:103
+  rt vpn export 400:102
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# 
+R2# 
+R2# sh ip route vrf blue
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+VRF blue:
+C>* 10.0.21.0/30 is directly connected, eth2, 02:04:20
+B>* 172.16.2.0/24 [20/0] via 10.0.21.2, eth2, weight 1, 00:21:05
+B>  172.16.3.0/24 [200/0] via 5.5.5.5 (vrf default) (recursive), label 144, weight 1, 00:20:34
+  *                         via 20.0.23.2, eth1 (vrf default), label 19/144, weight 1, 00:20:34
+R2# sh ip bgp vrf blue summary
+
+IPv4 Unicast Summary (VRF blue):
+BGP router identifier 10.0.21.1, local AS number 400 vrf-id 2
+BGP table version 2
+RIB entries 3, using 576 bytes of memory
+Peers 1, using 13 KiB of memory
+
+Neighbor        V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd   PfxSnt Desc
+10.0.21.2       4        102        37        35        2    0    0 00:21:19            1        2 N/A
+
+Total number of neighbors 1
+R2# 
+R2# 
+R2# sh ip route vrf blue      
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+VRF blue:
+C>* 10.0.21.0/30 is directly connected, eth2, 02:06:53
+B>* 172.16.2.0/24 [20/0] via 10.0.21.2, eth2, weight 1, 00:23:38
+B>  172.16.3.0/24 [200/0] via 5.5.5.5 (vrf default) (recursive), label 144, weight 1, 00:23:07
+  *                         via 20.0.23.2, eth1 (vrf default), label 19/144, weight 1, 00:23:07
+R2# sh ip bgp vrf blue summary
+
+IPv4 Unicast Summary (VRF blue):
+BGP router identifier 10.0.21.1, local AS number 400 vrf-id 2
+BGP table version 2
+RIB entries 3, using 576 bytes of memory
+Peers 1, using 13 KiB of memory
+
+Neighbor        V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd   PfxSnt Desc
+10.0.21.2       4        102        39        37        2    0    0 00:23:47            1        2 N/A
+
+Total number of neighbors 1
+R2# sh ip bgp vrf red summary    
+% BGP instance not found
+R2# sh ip bgp vrf blue summary
+R2# sh ip router vrf red
+% VRF red not found
+R2# 
+R2# 
+R2# 
+R2# 
+R2# sh ip route vrf blue
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+VRF blue:
+C>* 10.0.21.0/30 is directly connected, eth2, 02:16:53
+B>* 172.16.2.0/24 [20/0] via 10.0.21.2, eth2, weight 1, 00:33:38
+B>  172.16.3.0/24 [200/0] via 5.5.5.5 (vrf default) (recursive), label 144, weight 1, 00:33:07
+  *                         via 20.0.23.2, eth1 (vrf default), label 19/144, weight 1, 00:33:07
+R2# 
+R2# 
+R2# 
+R2# sh ip bgp vrf blue
+BGP table version is 2, local router ID is 10.0.21.1, vrf id 2
+Default local pref 100, local AS 400
+Status codes:  s suppressed, d damped, h history, * valid, > best, = multipath,
+               i internal, r RIB-failure, S Stale, R Removed
+Nexthop codes: @NNN nexthop's vrf id, < announce-nh-self
+Origin codes:  i - IGP, e - EGP, ? - incomplete
+RPKI validation codes: V valid, I invalid, N Not found
+
+    Network          Next Hop            Metric LocPrf Weight Path
+ *> 172.16.2.0/24    10.0.21.2                0             0 102 i
+ *> 172.16.3.0/24    5.5.5.5@0<               0    100      0 103 i
+
+Displayed  2 routes and 2 total paths
+R2# 
+R2# 
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:102
+  rt vpn import 400:103
+  rt vpn export 400:102
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# 
+R2# 
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:102
+  rt vpn import 400:103
+  rt vpn export 400:102
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# 
+R2# conf
+R2(config)# 
+R2(config)# router bgp 400 vrf blue
+R2(config-router)# address-family 
+  ipv4   Address Family
+  ipv6   Address Family
+  l2vpn  Address Family
+R2(config-router)# address-family ipv4  
+  <cr>             
+  flowspec         Address Family modifier
+  labeled-unicast  Address Family modifier
+  multicast        Address Family modifier
+  unicast          Address Family modifier
+  vpn              Address Family modifier
+R2(config-router)# address-family ipv4 
+  <cr>             
+  flowspec         Address Family modifier
+  labeled-unicast  Address Family modifier
+  multicast        Address Family modifier
+  unicast          Address Family modifier
+  vpn              Address Family modifier
+R2(config-router)# address-family ipv4 unicast
+R2(config-router-af)# 
+  aggregate-address    Configure BGP aggregate entries
+  bgp                  BGP Specific commands
+  distance             Define an administrative distance
+  end                  End current mode and change to enable mode
+  exit                 Exit current mode and down to previous mode
+  exit-address-family  Exit from Address Family configuration mode
+  export               Export routes from this address-family
+  find                 Find CLI command matching a regular expression
+  import               Import routes from another VRF
+  label                label value for VRF
+  list                 Print command list
+  maximum-paths        Forward packets over multiple paths
+  neighbor             Specify neighbor router
+  network              Specify a network to announce via BGP
+  nexthop              Specify next hop to use for VRF advertised prefixes
+  no                   Negate a command or set its defaults
+  output               Direct vtysh output to file
+  quit                 Exit current mode and down to previous mode
+  rd                   Specify route distinguisher
+  redistribute         Redistribute information from another routing protocol
+  route-map            Specify route map
+  route-target         Specify route target list
+  route-target6        Specify route target list
+  rt                   Specify route target list
+  rt6                  Specify route target list
+  sid                  sid value for VRF
+  table-map            BGP table to RIB route download filter
+R2(config-router-af)# rd vpn export 
+R2(config-router-af)# do sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:102
+  rt vpn import 400:103
+  rt vpn export 400:102
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2(config-router-af)# no rd vpn export 400:102
+R2(config-router-af)# route-target
+  route-target   Specify route target list
+  route-target6  Specify route target list
+R2(config-router-af)# route-target 
+  redirect  Flow-spec redirect type route target
+  vpn       Between current address-family and vpn
+R2(config-router-af)# route-target vpn 
+  both    both import: match any and export: set
+  export  For routes leaked from current address-family to vpn: set
+  import  For routes leaked from vpn to current address-family: match any
+R2(config-router-af)# no route-target vpn export 400:102
+R2(config-router-af)# no route-target vpn import 400:103      
+R2(config-router-af)# end
+R2# 
+R2# 
+R2# conf
+R2(config)# 
+R2(config)# router bgp 400
+R2(config-router)#  exit
+R2(config)# router bgp 400 vrf blue
+R2(config-router)# address-family ipv4 unicast
+R2(config-router-af)# rd vpn export 400:1
+R2(config-router-af)# route-target vpn export 400:1
+R2(config-router-af)# route-target vpn import 400:1
+R2(config-router-af)# end
+R2# 
+R2# 
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:1
+  rt vpn both 400:1
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# 
+R2# 
+R2# clear ip bgp * soft
+R2# 
+R2# sh ip route vrf blue
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+VRF blue:
+C>* 10.0.21.0/30 is directly connected, eth2, 04:16:02
+B>  172.16.1.0/24 [200/0] via 1.1.1.1 (vrf default) (recursive), label 144, weight 1, 00:01:37
+  *                         via 20.0.23.2, eth1 (vrf default), label 16/144, weight 1, 00:01:37
+B>* 172.16.2.0/24 [20/0] via 10.0.21.2, eth2, weight 1, 02:32:47
+B>  172.16.3.0/24 [200/0] via 5.5.5.5 (vrf default) (recursive), label 144, weight 1, 00:00:40
+  *                         via 20.0.23.2, eth1 (vrf default), label 19/144, weight 1, 00:00:40
+R2# 
+R2# 
+R2# 
+R2# sh run          
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:1
+  rt vpn both 400:1
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# 
+R2# 
+R2# conf
+R2(config)# 
+R2(config)# router bgp 400 vrf red
+R2(config-router)# address-family ipv4 
+  <cr>             
+  flowspec         Address Family modifier
+  labeled-unicast  Address Family modifier
+  multicast        Address Family modifier
+  unicast          Address Family modifier
+  vpn              Address Family modifier
+R2(config-router)# address-family ipv4 unicast
+R2(config-router-af)# end                   
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:1
+  rt vpn both 400:1
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router bgp 400 vrf red
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# conf
+R2(config)# no router bgp 400 vrf red
+R2(config)# end
+R2# 
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:1
+  rt vpn both 400:1
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# 
+R2# 
+R2# 
+R2# clear ip bgp * soft
+R2# 
+R2# 
+R2# 
+R2# sh ip router vrf blue
+R2# sh ip route vrf blue
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+VRF blue:
+C>* 10.0.21.0/30 is directly connected, eth2, 04:20:20
+B>  172.16.1.0/24 [200/0] via 1.1.1.1 (vrf default) (recursive), label 144, weight 1, 00:05:55
+  *                         via 20.0.23.2, eth1 (vrf default), label 16/144, weight 1, 00:05:55
+B>* 172.16.2.0/24 [20/0] via 10.0.21.2, eth2, weight 1, 02:37:05
+B>  172.16.3.0/24 [200/0] via 5.5.5.5 (vrf default) (recursive), label 144, weight 1, 00:04:58
+  *                         via 20.0.23.2, eth1 (vrf default), label 19/144, weight 1, 00:04:58
+R2# sh ip bgp vrf blue summary
+
+IPv4 Unicast Summary (VRF blue):
+BGP router identifier 10.0.21.1, local AS number 400 vrf-id 2
+BGP table version 5
+RIB entries 5, using 960 bytes of memory
+Peers 1, using 13 KiB of memory
+
+Neighbor        V         AS   MsgRcvd   MsgSent   TblVer  InQ OutQ  Up/Down State/PfxRcd   PfxSnt Desc
+10.0.21.2       4        102       176       174        5    0    0 02:37:17            1        3 N/A
+
+Total number of neighbors 1
+R2# 
+R2# 
+R2# 
+R2# 
+R2# 
+R2# 
+R2# 
+R2# 
+R2# 
+R2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R2
+no ipv6 forwarding
+!
+interface eth2
+ ip address 10.0.21.1/30
+exit
+!
+interface eth1
+ ip address 20.0.23.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 2.2.2.2/32
+ mpls enable
+exit
+!
+router bgp 400
+ no bgp ebgp-requires-policy
+ neighbor 1.1.1.1 remote-as 400
+ neighbor 1.1.1.1 update-source lo
+ neighbor 5.5.5.5 remote-as 400
+ neighbor 5.5.5.5 update-source lo
+ !
+ address-family ipv4 unicast
+  neighbor 1.1.1.1 next-hop-self
+  neighbor 5.5.5.5 next-hop-self
+ exit-address-family
+ !
+ address-family ipv4 vpn
+  neighbor 1.1.1.1 activate
+  neighbor 5.5.5.5 activate
+ exit-address-family
+exit
+!
+router bgp 400 vrf blue
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.2 remote-as 102
+ !
+ address-family ipv4 unicast
+  label vpn export auto
+  rd vpn export 400:1
+  rt vpn both 400:1
+  export vpn
+  import vpn
+ exit-address-family
+exit
+!
+router ospf
+ network 2.2.2.2/32 area 0.0.0.0
+ network 20.0.23.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 2.2.2.2
+ !
+ address-family ipv4
+  discovery transport-address 2.2.2.2
+  !
+  interface eth1
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R2# 

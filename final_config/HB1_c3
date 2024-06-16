@@ -1,0 +1,192 @@
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-HB1 /bin/bash 
+HB1:/# ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+96: eth0@if97: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default 
+    link/ether 02:42:ac:14:14:0d brd ff:ff:ff:ff:ff:ff link-netnsid 0
+    inet 172.20.20.13/24 brd 172.20.20.255 scope global eth0
+       valid_lft forever preferred_lft forever
+    inet6 2001:172:20:20::d/64 scope global nodad 
+       valid_lft forever preferred_lft forever
+    inet6 fe80::42:acff:fe14:140d/64 scope link 
+       valid_lft forever preferred_lft forever
+114: eth1@if115: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 9500 qdisc noqueue state UP group default 
+    link/ether aa:c1:ab:47:24:3e brd ff:ff:ff:ff:ff:ff link-netnsid 1
+    inet 172.16.1.200/24 scope global eth1
+       valid_lft forever preferred_lft forever
+    inet6 fe80::a8c1:abff:fe47:243e/64 scope link 
+       valid_lft forever preferred_lft forever
+HB1:/# ping 172.16.3.200
+PING 172.16.3.200 (172.16.3.200): 56 data bytes
+^C
+--- 172.16.3.200 ping statistics ---
+31 packets transmitted, 0 packets received, 100% packet loss
+HB1:/# ping vrf blue 172.16.3.200
+BusyBox v1.36.1 (2023-07-27 17:12:24 UTC) multi-call binary.
+
+Usage: ping [OPTIONS] HOST
+
+Send ICMP ECHO_REQUESTs to HOST
+
+        -4,-6           Force IP or IPv6 name resolution
+        -c CNT          Send only CNT pings
+        -s SIZE         Send SIZE data bytes in packets (default 56)
+        -i SECS         Interval
+        -A              Ping as soon as reply is received
+        -t TTL          Set TTL
+        -I IFACE/IP     Source interface or IP address
+        -W SEC          Seconds to wait for the first response (default 10)
+                        (after all -c CNT packets are sent)
+        -w SEC          Seconds until ping exits (default:infinite)
+                        (can exit earlier with -c CNT)
+        -q              Quiet, only display output at start/finish
+        -p HEXBYTE      Payload pattern
+HB1:/# ping 172.16.3.200
+PING 172.16.3.200 (172.16.3.200): 56 data bytes
+^C
+--- 172.16.3.200 ping statistics ---
+3 packets transmitted, 0 packets received, 100% packet loss
+HB1:/# ping 172.16.3.200
+PING 172.16.3.200 (172.16.3.200): 56 data bytes
+^C
+--- 172.16.3.200 ping statistics ---
+19 packets transmitted, 0 packets received, 100% packet loss
+HB1:/# ping 172.16.3.200
+PING 172.16.3.200 (172.16.3.200): 56 data bytes
+64 bytes from 172.16.3.200: seq=0 ttl=60 time=0.179 ms
+64 bytes from 172.16.3.200: seq=1 ttl=60 time=0.260 ms
+64 bytes from 172.16.3.200: seq=2 ttl=60 time=0.358 ms
+64 bytes from 172.16.3.200: seq=3 ttl=60 time=0.201 ms
+64 bytes from 172.16.3.200: seq=4 ttl=60 time=0.507 ms
+64 bytes from 172.16.3.200: seq=5 ttl=60 time=0.169 ms
+64 bytes from 172.16.3.200: seq=6 ttl=60 time=0.759 ms
+64 bytes from 172.16.3.200: seq=7 ttl=60 time=0.242 ms
+64 bytes from 172.16.3.200: seq=8 ttl=60 time=0.353 ms
+64 bytes from 172.16.3.200: seq=9 ttl=60 time=0.203 ms
+64 bytes from 172.16.3.200: seq=10 ttl=60 time=0.395 ms
+64 bytes from 172.16.3.200: seq=11 ttl=60 time=0.263 ms
+64 bytes from 172.16.3.200: seq=12 ttl=60 time=0.198 ms
+64 bytes from 172.16.3.200: seq=13 ttl=60 time=0.183 ms
+64 bytes from 172.16.3.200: seq=14 ttl=60 time=0.261 ms
+^C
+--- 172.16.3.200 ping statistics ---
+15 packets transmitted, 15 packets received, 0% packet loss
+round-trip min/avg/max = 0.169/0.302/0.759 ms
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# ping 172.16.3.200
+PING 172.16.3.200 (172.16.3.200): 56 data bytes
+64 bytes from 172.16.3.200: seq=0 ttl=60 time=0.138 ms
+64 bytes from 172.16.3.200: seq=1 ttl=60 time=0.253 ms
+64 bytes from 172.16.3.200: seq=2 ttl=60 time=0.214 ms
+64 bytes from 172.16.3.200: seq=3 ttl=60 time=0.154 ms
+64 bytes from 172.16.3.200: seq=4 ttl=60 time=0.304 ms
+64 bytes from 172.16.3.200: seq=5 ttl=60 time=0.326 ms
+64 bytes from 172.16.3.200: seq=6 ttl=60 time=0.187 ms
+64 bytes from 172.16.3.200: seq=7 ttl=60 time=0.267 ms
+64 bytes from 172.16.3.200: seq=8 ttl=60 time=0.262 ms
+64 bytes from 172.16.3.200: seq=9 ttl=60 time=0.157 ms
+64 bytes from 172.16.3.200: seq=10 ttl=60 time=0.264 ms
+64 bytes from 172.16.3.200: seq=11 ttl=60 time=0.258 ms
+64 bytes from 172.16.3.200: seq=12 ttl=60 time=0.238 ms
+64 bytes from 172.16.3.200: seq=13 ttl=60 time=0.127 ms
+64 bytes from 172.16.3.200: seq=14 ttl=60 time=0.265 ms
+64 bytes from 172.16.3.200: seq=15 ttl=60 time=0.280 ms
+64 bytes from 172.16.3.200: seq=16 ttl=60 time=0.312 ms
+64 bytes from 172.16.3.200: seq=17 ttl=60 time=0.480 ms
+64 bytes from 172.16.3.200: seq=18 ttl=60 time=0.246 ms
+64 bytes from 172.16.3.200: seq=19 ttl=60 time=0.258 ms
+64 bytes from 172.16.3.200: seq=20 ttl=60 time=0.397 ms
+64 bytes from 172.16.3.200: seq=21 ttl=60 time=0.384 ms
+64 bytes from 172.16.3.200: seq=22 ttl=60 time=0.258 ms
+64 bytes from 172.16.3.200: seq=23 ttl=60 time=0.188 ms
+64 bytes from 172.16.3.200: seq=24 ttl=60 time=0.169 ms
+64 bytes from 172.16.3.200: seq=25 ttl=60 time=0.247 ms
+64 bytes from 172.16.3.200: seq=26 ttl=60 time=0.283 ms
+64 bytes from 172.16.3.200: seq=27 ttl=60 time=0.167 ms
+64 bytes from 172.16.3.200: seq=28 ttl=60 time=0.138 ms
+64 bytes from 172.16.3.200: seq=29 ttl=60 time=0.192 ms
+64 bytes from 172.16.3.200: seq=30 ttl=60 time=0.240 ms
+64 bytes from 172.16.3.200: seq=31 ttl=60 time=0.256 ms
+64 bytes from 172.16.3.200: seq=32 ttl=60 time=0.257 ms
+64 bytes from 172.16.3.200: seq=33 ttl=60 time=0.241 ms
+64 bytes from 172.16.3.200: seq=34 ttl=60 time=0.259 ms
+64 bytes from 172.16.3.200: seq=35 ttl=60 time=0.238 ms
+64 bytes from 172.16.3.200: seq=36 ttl=60 time=0.134 ms
+64 bytes from 172.16.3.200: seq=37 ttl=60 time=0.237 ms
+64 bytes from 172.16.3.200: seq=38 ttl=60 time=0.591 ms
+64 bytes from 172.16.3.200: seq=39 ttl=60 time=0.291 ms
+64 bytes from 172.16.3.200: seq=40 ttl=60 time=0.241 ms
+64 bytes from 172.16.3.200: seq=41 ttl=60 time=0.188 ms
+64 bytes from 172.16.3.200: seq=42 ttl=60 time=0.241 ms
+64 bytes from 172.16.3.200: seq=43 ttl=60 time=0.258 ms
+64 bytes from 172.16.3.200: seq=44 ttl=60 time=0.438 ms
+64 bytes from 172.16.3.200: seq=45 ttl=60 time=0.740 ms
+64 bytes from 172.16.3.200: seq=46 ttl=60 time=0.400 ms
+64 bytes from 172.16.3.200: seq=47 ttl=60 time=0.252 ms
+64 bytes from 172.16.3.200: seq=48 ttl=60 time=0.254 ms
+64 bytes from 172.16.3.200: seq=49 ttl=60 time=0.366 ms
+64 bytes from 172.16.3.200: seq=50 ttl=60 time=0.361 ms
+64 bytes from 172.16.3.200: seq=51 ttl=60 time=0.261 ms
+64 bytes from 172.16.3.200: seq=52 ttl=60 time=0.260 ms
+64 bytes from 172.16.3.200: seq=53 ttl=60 time=0.166 ms
+64 bytes from 172.16.3.200: seq=54 ttl=60 time=0.149 ms
+64 bytes from 172.16.3.200: seq=55 ttl=60 time=0.186 ms
+64 bytes from 172.16.3.200: seq=56 ttl=60 time=0.391 ms
+64 bytes from 172.16.3.200: seq=57 ttl=60 time=0.495 ms
+64 bytes from 172.16.3.200: seq=58 ttl=60 time=0.263 ms
+64 bytes from 172.16.3.200: seq=59 ttl=60 time=0.247 ms
+64 bytes from 172.16.3.200: seq=60 ttl=60 time=0.241 ms
+64 bytes from 172.16.3.200: seq=61 ttl=60 time=0.244 ms
+64 bytes from 172.16.3.200: seq=62 ttl=60 time=0.264 ms
+64 bytes from 172.16.3.200: seq=63 ttl=60 time=0.176 ms
+64 bytes from 172.16.3.200: seq=64 ttl=60 time=0.192 ms
+64 bytes from 172.16.3.200: seq=65 ttl=60 time=0.261 ms
+64 bytes from 172.16.3.200: seq=66 ttl=60 time=0.265 ms
+64 bytes from 172.16.3.200: seq=67 ttl=60 time=0.379 ms
+64 bytes from 172.16.3.200: seq=68 ttl=60 time=0.244 ms
+^C
+--- 172.16.3.200 ping statistics ---
+69 packets transmitted, 69 packets received, 0% packet loss
+round-trip min/avg/max = 0.127/0.269/0.740 ms
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# 
+HB1:/# ping 172.16.3.200
+PING 172.16.3.200 (172.16.3.200): 56 data bytes
+64 bytes from 172.16.3.200: seq=0 ttl=60 time=0.263 ms
+64 bytes from 172.16.3.200: seq=1 ttl=60 time=0.255 ms
+64 bytes from 172.16.3.200: seq=2 ttl=60 time=0.254 ms
+64 bytes from 172.16.3.200: seq=3 ttl=60 time=0.255 ms
+^C
+--- 172.16.3.200 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.254/0.256/0.263 ms
+HB1:/# ping 172.16.2.200
+PING 172.16.2.200 (172.16.2.200): 56 data bytes
+64 bytes from 172.16.2.200: seq=0 ttl=60 time=0.194 ms
+64 bytes from 172.16.2.200: seq=1 ttl=60 time=0.538 ms
+64 bytes from 172.16.2.200: seq=2 ttl=60 time=0.097 ms
+64 bytes from 172.16.2.200: seq=3 ttl=60 time=0.399 ms
+^C
+--- 172.16.2.200 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.097/0.307/0.538 ms
+HB1:/# 

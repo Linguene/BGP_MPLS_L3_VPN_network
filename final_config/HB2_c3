@@ -1,0 +1,41 @@
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-HB2 /bin/bash
+HB2:/# ping 172.16.1.200
+PING 172.16.1.200 (172.16.1.200): 56 data bytes
+64 bytes from 172.16.1.200: seq=0 ttl=60 time=0.116 ms
+64 bytes from 172.16.1.200: seq=1 ttl=60 time=0.243 ms
+64 bytes from 172.16.1.200: seq=2 ttl=60 time=0.094 ms
+64 bytes from 172.16.1.200: seq=3 ttl=60 time=0.248 ms
+^C
+--- 172.16.1.200 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.094/0.175/0.248 ms
+HB2:/# ping 172.16.3.200
+PING 172.16.3.200 (172.16.3.200): 56 data bytes
+64 bytes from 172.16.3.200: seq=0 ttl=60 time=0.121 ms
+64 bytes from 172.16.3.200: seq=1 ttl=60 time=0.303 ms
+64 bytes from 172.16.3.200: seq=2 ttl=60 time=0.226 ms
+64 bytes from 172.16.3.200: seq=3 ttl=60 time=0.252 ms
+^C
+--- 172.16.3.200 ping statistics ---
+4 packets transmitted, 4 packets received, 0% packet loss
+round-trip min/avg/max = 0.121/0.225/0.303 ms
+HB2:/# 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

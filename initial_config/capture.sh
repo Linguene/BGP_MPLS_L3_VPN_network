@@ -1,0 +1,1 @@
+sudo ip netns exec $1 tcpdump -U -nni $2 -w - | wireshark -k -i -

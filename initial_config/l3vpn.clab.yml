@@ -1,0 +1,149 @@
+name: l3vpn
+
+topology:
+  defaults:
+    kind: linux
+  nodes:
+    R1:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - R1.conf:/etc/frr/frr.conf
+      exec:
+      - sysctl -w net.mpls.conf.lo.input=1
+      - sysctl -w net.mpls.conf.eth1.input=1
+      - sysctl -w net.mpls.platform_labels=1048575
+      - ip link add blue type vrf table 1
+      - ip link add red type vrf table 2
+      - ip link set eth2 vrf blue
+      - ip link set eth3 vrf red
+      - ip link set blue up
+      - ip link set red up
+    R2:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - R2.conf:/etc/frr/frr.conf
+      exec:
+      - sysctl -w net.mpls.conf.lo.input=1
+      - sysctl -w net.mpls.conf.eth1.input=1
+      - sysctl -w net.mpls.platform_labels=1048575
+      - ip link add blue type vrf table 1
+      - ip link set eth2 vrf blue
+      - ip link set blue up
+    R3:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - R3.conf:/etc/frr/frr.conf
+      exec:
+      - sysctl -w net.mpls.conf.lo.input=1
+      - sysctl -w net.mpls.conf.eth1.input=1
+      - sysctl -w net.mpls.conf.eth2.input=1
+      - sysctl -w net.mpls.conf.eth3.input=1
+      - sysctl -w net.mpls.platform_labels=1048575
+    R4:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - R4.conf:/etc/frr/frr.conf
+      exec:
+      - sysctl -w net.mpls.conf.lo.input=1
+      - sysctl -w net.mpls.conf.eth1.input=1
+      - sysctl -w net.mpls.conf.eth2.input=1
+      - sysctl -w net.mpls.platform_labels=1048575
+    R5:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - R5.conf:/etc/frr/frr.conf
+      exec:
+      - sysctl -w net.mpls.conf.lo.input=1
+      - sysctl -w net.mpls.conf.eth1.input=1
+      - sysctl -w net.mpls.platform_labels=1048575
+      - ip link add blue type vrf table 1
+      - ip link add red type vrf table 2
+      - ip link set eth2 vrf blue
+      - ip link set eth3 vrf red
+      - ip link set blue up
+      - ip link set red up
+    CBL1:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - CBL1.conf:/etc/frr/frr.conf
+    CBL2:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - CBL2.conf:/etc/frr/frr.conf
+    CRL1:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - CRL1.conf:/etc/frr/frr.conf
+    CBL3:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - CBL3.conf:/etc/frr/frr.conf
+    CRL3:
+      image: frr
+      memory: 70mb
+      binds: 
+      - daemons:/etc/frr/daemons
+      - CRL3.conf:/etc/frr/frr.conf
+    HB1:
+      image: vpc
+      memory: 10mb
+      exec:
+      - ip addr add 172.16.1.200/24 dev eth1
+      - ip route replace 0/0 via 172.16.1.1
+    HR1:
+      image: vpc
+      memory: 10mb
+      exec:
+      - ip addr add 172.16.1.200/24 dev eth1
+      - ip route replace 0/0 via 172.16.1.1
+    HB2:
+      image: vpc
+      memory: 10mb
+      exec:
+      - ip addr add 172.16.2.200/24 dev eth1
+      - ip route replace 0/0 via 172.16.2.1
+    HR3:
+      image: vpc
+      memory: 10mb
+      exec:
+      - ip addr add 172.16.3.200/24 dev eth1
+      - ip route replace 0/0 via 172.16.3.1
+    HB3:
+      image: vpc
+      memory: 10mb
+      exec:
+      - ip addr add 172.16.3.200/24 dev eth1
+      - ip route replace 0/0 via 172.16.3.1
+  links:
+    - endpoints: ["R1:eth1", "R3:eth1"]
+    - endpoints: ["R2:eth1", "R3:eth2"]
+    - endpoints: ["R3:eth3", "R4:eth1"]
+    - endpoints: ["R4:eth2", "R5:eth1"]
+    - endpoints: ["R1:eth2", "CBL1:eth1"]
+    - endpoints: ["R1:eth3", "CRL1:eth1"]
+    - endpoints: ["R2:eth2", "CBL2:eth1"]
+    - endpoints: ["R5:eth2", "CBL3:eth1"]
+    - endpoints: ["R5:eth3", "CRL3:eth1"]
+    - endpoints: ["CRL1:eth2", "HR1:eth1"]
+    - endpoints: ["CBL2:eth2", "HB2:eth1"]
+    - endpoints: ["CBL3:eth2", "HB3:eth1"]
+    - endpoints: ["CRL3:eth2", "HR3:eth1"]
+    - endpoints: ["CBL1:eth2", "HB1:eth1"]

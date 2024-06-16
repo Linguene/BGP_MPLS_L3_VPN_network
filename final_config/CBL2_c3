@@ -1,0 +1,164 @@
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-CBL2 vtysh
+
+Hello, this is FRRouting (version 9.0.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+CBL2# conf
+CBL2(config)# 
+CBL2(config)# router bgp 102
+CBL2(config-router)# no bgp ebgp-requires-policy 
+CBL2(config-router)# neighbor 10.0.21.1 remote-as 400
+CBL2(config-router)# network 172.16.2.0 mask 255.255.255.0
+CBL2(config-router)# end
+
+CBL2# 
+CBL2# 
+CBL2# 
+CBL2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL2
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.21.2/30
+exit
+!
+interface eth2
+ ip address 172.16.2.1/24
+exit
+!
+interface lo
+ ip address 12.12.12.12/32
+exit
+!
+router bgp 102
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.2.0/24
+ exit-address-family
+exit
+!
+end
+CBL2# conf
+CBL2(config)# 
+CBL2(config)# router bgp 102
+CBL2(config-router)# neighbor 10.0.21.1 allowas-in
+CBL2(config-router)# end
+CBL2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL2
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.21.2/30
+exit
+!
+interface eth2
+ ip address 172.16.2.1/24
+exit
+!
+interface lo
+ ip address 12.12.12.12/32
+exit
+!
+router bgp 102
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.2.0/24
+  neighbor 10.0.21.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL2# clear ip bgp * soft
+CBL2# 
+CBL2# 
+CBL2# 
+CBL2# 
+CBL2# sh run 
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL2
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.21.2/30
+exit
+!
+interface eth2
+ ip address 172.16.2.1/24
+exit
+!
+interface lo
+ ip address 12.12.12.12/32
+exit
+!
+router bgp 102
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.2.0/24
+  neighbor 10.0.21.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL2# 
+CBL2# 
+CBL2# 
+CBL2# 
+CBL2# 
+CBL2# 
+CBL2# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL2
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.21.2/30
+exit
+!
+interface eth2
+ ip address 172.16.2.1/24
+exit
+!
+interface lo
+ ip address 12.12.12.12/32
+exit
+!
+router bgp 102
+ no bgp ebgp-requires-policy
+ neighbor 10.0.21.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.2.0/24
+  neighbor 10.0.21.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL2# 

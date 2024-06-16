@@ -1,0 +1,318 @@
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-R4 vtysh
+
+Hello, this is FRRouting (version 9.0.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+R4# sh int br
+Interface       Status  VRF             Addresses
+---------       ------  ---             ---------
+eth0            up      default         172.20.20.16/24
+                                        + 2001:172:20:20::10/64
+eth1            up      default         20.0.34.2/30
+eth2            up      default         20.0.45.1/30
+lo              up      default         4.4.4.4/32
+
+R4# 
+R4# sh ip route
+Codes: K - kernel route, C - connected, S - static, R - RIP,
+       O - OSPF, I - IS-IS, B - BGP, E - EIGRP, N - NHRP,
+       T - Table, v - VNC, V - VNC-Direct, A - Babel, F - PBR,
+       f - OpenFabric,
+       > - selected route, * - FIB route, q - queued, r - rejected, b - backup
+       t - trapped, o - offload failure
+
+K>* 0.0.0.0/0 [0/0] via 172.20.20.1, eth0, 00:40:56
+O>* 1.1.1.1/32 [110/20] via 20.0.34.1, eth1, weight 1, 00:40:05
+O>* 2.2.2.2/32 [110/20] via 20.0.34.1, eth1, weight 1, 00:40:05
+O>* 3.3.3.3/32 [110/10] via 20.0.34.1, eth1, weight 1, 00:40:05
+O   4.4.4.4/32 [110/0] is directly connected, lo, weight 1, 00:40:55
+C>* 4.4.4.4/32 is directly connected, lo, 00:40:55
+O>* 5.5.5.5/32 [110/10] via 20.0.45.2, eth2, weight 1, 00:40:06
+O>* 20.0.13.0/30 [110/20] via 20.0.34.1, eth1, weight 1, 00:40:05
+O>* 20.0.23.0/30 [110/20] via 20.0.34.1, eth1, weight 1, 00:40:05
+O   20.0.34.0/30 [110/10] is directly connected, eth1, weight 1, 00:40:55
+C>* 20.0.34.0/30 is directly connected, eth1, 00:40:55
+O   20.0.45.0/30 [110/10] is directly connected, eth2, weight 1, 00:40:55
+C>* 20.0.45.0/30 is directly connected, eth2, 00:40:55
+C>* 172.20.20.0/24 is directly connected, eth0, 00:40:56
+R4#   
+R4# 
+R4# sh ip ospf database
+
+       OSPF Router with ID (4.4.4.4)
+
+                Router Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum  Link count
+2.2.2.2        2.2.2.2          830 0x80000005 0xa71d 2
+3.3.3.3        3.3.3.3          812 0x8000000d 0x8c3c 4
+4.4.4.4        4.4.4.4          844 0x80000008 0x678c 3
+172.20.20.2    172.20.20.2      842 0x80000005 0xc627 2
+172.20.20.7    172.20.20.7      811 0x80000005 0x88ad 2
+
+                Net Link States (Area 0.0.0.0)
+
+Link ID         ADV Router      Age  Seq#       CkSum
+20.0.13.1      172.20.20.7      851 0x80000002 0x5026
+20.0.23.2      3.3.3.3          812 0x80000002 0xd638
+20.0.34.2      4.4.4.4          854 0x80000002 0x9364
+20.0.45.2      172.20.20.2      852 0x80000002 0x1e3d
+
+
+R4# conf
+R4(config)# 
+R4(config)# 
+R4(config)# mpls l
+  label  Label configuration
+  ldp    Label Distribution Protocol
+  lsp    Establish label switched path
+R4(config)# mpls ldp
+R4(config-ldp)# router-id 4.4.4.4
+R4(config-ldp)# address-family ipv4
+R4(config-ldp-af)# discovery transport-address 4.4.4.4
+R4(config-ldp-af)# interface eth1
+R4(config-ldp-af-if)# exit
+R4(config-ldp-af)# interface eth2
+R4(config-ldp-af-if)# 
+  discovery  Configure discovery parameters
+  end        End current mode and change to enable mode
+  exit       Exit current mode and down to previous mode
+  find       Find CLI command matching a regular expression
+  list       Print command list
+  no         Negate a command or set its defaults
+  output     Direct vtysh output to file
+  quit       Exit current mode and down to previous mode
+R4(config-ldp-af-if)# no shut
+% Unknown command: no shut
+R4(config-ldp-af-if)# exit
+R4(config-ldp-af)# exit
+R4(config-ldp)# exit
+R4(config)# 
+R4(config)# 
+R4(config)# end
+R4# 
+R4# 
+R4# sh mpls ldp neighbor 
+AF   ID              State       Remote Address    Uptime
+ipv4 3.3.3.3         OPERATIONAL 3.3.3.3         00:01:50
+ipv4 5.5.5.5         OPERATIONAL 5.5.5.5         00:01:01
+R4# 
+R4# 
+R4# 
+R4# show mpls 
+  fec          MPLS FEC table
+  ldp          Label Distribution Protocol
+  pseudowires  Pseudowires
+  status       MPLS status
+  table        MPLS table
+R4# show mpls table
+ Inbound Label  Type  Nexthop    Outbound Label  
+ ------------------------------------------------
+ 16             LDP   20.0.34.1  16              
+ 17             LDP   20.0.34.1  17              
+ 18             LDP   20.0.34.1  implicit-null   
+ 19             LDP   20.0.34.1  implicit-null   
+ 20             LDP   20.0.34.1  implicit-null   
+ 21             LDP   20.0.45.2  implicit-null   
+
+R4# 
+R4# 
+R4# 
+R4# 
+R4# show mpls ldp binding detail
+1.1.1.1/32
+        Local binding: label: 16
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label 16 (in use)
+            5.5.5.5:0, label 16
+2.2.2.2/32
+        Local binding: label: 17
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label 17 (in use)
+            5.5.5.5:0, label 17
+3.3.3.3/32
+        Local binding: label: 18
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label imp-null (in use)
+            5.5.5.5:0, label 18
+4.4.4.4/32
+        Local binding: label: imp-null
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label 18
+            5.5.5.5:0, label 19
+5.5.5.5/32
+        Local binding: label: 21
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label 19
+            5.5.5.5:0, label imp-null (in use)
+20.0.13.0/30
+        Local binding: label: 19
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label imp-null (in use)
+            5.5.5.5:0, label 20
+20.0.23.0/30
+        Local binding: label: 20
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label imp-null (in use)
+            5.5.5.5:0, label 21
+20.0.34.0/30
+        Local binding: label: imp-null
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label imp-null
+            5.5.5.5:0, label 22
+20.0.45.0/30
+        Local binding: label: imp-null
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label 20
+            5.5.5.5:0, label imp-null
+172.20.20.0/24
+        Local binding: label: imp-null
+        Advertised to:
+            3.3.3.3:0
+            5.5.5.5:0
+        Remote bindings:
+            3.3.3.3:0, label imp-null
+            5.5.5.5:0, label imp-null
+2001:172:20:20::/64
+        Local binding: label: imp-null
+        No remote bindings
+
+R4# 
+R4# 
+R4# 
+R4# 
+R4# sh ip bgp summary
+% BGP instance not found
+R4# 
+R4# 
+R4# 
+R4# 
+R4# 
+R4# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R4
+no ipv6 forwarding
+!
+interface eth1
+ ip address 20.0.34.2/30
+ mpls enable
+exit
+!
+interface eth2
+ ip address 20.0.45.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 4.4.4.4/32
+ mpls enable
+exit
+!
+router ospf
+ network 4.4.4.4/32 area 0.0.0.0
+ network 20.0.34.0/30 area 0.0.0.0
+ network 20.0.45.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 4.4.4.4
+ !
+ address-family ipv4
+  discovery transport-address 4.4.4.4
+  !
+  interface eth1
+  exit
+  !
+  interface eth2
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R4# 
+R4# 
+R4# 
+R4# 
+R4# sh run  
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname R4
+no ipv6 forwarding
+!
+interface eth1
+ ip address 20.0.34.2/30
+ mpls enable
+exit
+!
+interface eth2
+ ip address 20.0.45.1/30
+ mpls enable
+exit
+!
+interface lo
+ ip address 4.4.4.4/32
+ mpls enable
+exit
+!
+router ospf
+ network 4.4.4.4/32 area 0.0.0.0
+ network 20.0.34.0/30 area 0.0.0.0
+ network 20.0.45.0/30 area 0.0.0.0
+exit
+!
+mpls ldp
+ router-id 4.4.4.4
+ !
+ address-family ipv4
+  discovery transport-address 4.4.4.4
+  !
+  interface eth1
+  exit
+  !
+  interface eth2
+  exit
+  !
+ exit-address-family
+ !
+exit
+!
+end
+R4# 

@@ -1,0 +1,177 @@
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-CRL1 vtysh
+
+Hello, this is FRRouting (version 9.0.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+CRL1# 
+CRL1# conf
+CRL1(config)# 
+CRL1(config)# router bgp 201
+CRL1(config-router)# no bgp ebgp-requires-policy 
+CRL1(config-router)# neighbor 10.0.12.1 remote-as 400
+CRL1(config-router)# network 172.16.1.0 mask 255.255.255.0
+CRL1(config-router)# end
+
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CRL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.12.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 21.21.21.21/32
+exit
+!
+router bgp 201
+ no bgp ebgp-requires-policy
+ neighbor 10.0.12.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+ exit-address-family
+exit
+!
+end
+CRL1# 
+CRL1# conf
+CRL1(config)# 
+CRL1(config)# router bgp 201
+CRL1(config-router)# neighbor 10.0.12.1 allowas-in
+CRL1(config-router)# end
+CRL1# 
+CRL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CRL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.12.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 21.21.21.21/32
+exit
+!
+router bgp 201
+ no bgp ebgp-requires-policy
+ neighbor 10.0.12.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+  neighbor 10.0.12.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CRL1# 
+CRL1# 
+CRL1# clear ip bgp * soft
+CRL1# 
+CRL1# conf
+CRL1(config)# 
+CRL1(config)# router bgp 201
+CRL1(config-router)# bgp ebgp-requires-policy 
+CRL1(config-router)# end
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CRL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.12.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 21.21.21.21/32
+exit
+!
+router bgp 201
+ no bgp ebgp-requires-policy
+ neighbor 10.0.12.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+  neighbor 10.0.12.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# 
+CRL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CRL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.12.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 21.21.21.21/32
+exit
+!
+router bgp 201
+ no bgp ebgp-requires-policy
+ neighbor 10.0.12.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+  neighbor 10.0.12.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CRL1# 

@@ -1,0 +1,229 @@
+ ~/Labs/l3vpn  docker exec -it clab-l3vpn-CBL1 vtysh
+
+Hello, this is FRRouting (version 9.0.1_git).
+Copyright 1996-2005 Kunihiro Ishiguro, et al.
+
+CBL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.11.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 11.11.11.11/32
+exit
+!
+end
+CBL1# conf
+CBL1(config)# router bgp 101
+CBL1(config-router)# neighbor 10.0.11.1 remote-as 400
+CBL1(config-router)# no bgp ebgp-requires-policy 
+CBL1(config-router)# network 172.16.1.0 
+  <cr>         
+  backdoor     Specify a BGP backdoor route
+  label-index  Label index to associate with the prefix
+  mask         Network mask
+  route-map    Route-map to modify the attributes
+CBL1(config-router)# network 172.16.1.0 mask 255.255.255.0
+CBL1(config-router)# end
+CBL1# 
+CBL1# 
+CBL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.11.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 11.11.11.11/32
+exit
+!
+router bgp 101
+ no bgp ebgp-requires-policy
+ neighbor 10.0.11.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+ exit-address-family
+exit
+!
+end
+CBL1# conf
+CBL1(config)# 
+CBL1(config)# router bgp 101
+CBL1(config-router)# neighbor 10.0.11.1       
+  advertisement-interval         Minimum interval between sending BGP routing updates
+  aigp                           Enable send and receive of the AIGP attribute per neighbor
+  bfd                            Enables BFD support
+  capability                     Advertise capability to the peer
+  description                    Neighbor specific description
+  disable-connected-check        one-hop away EBGP peer using loopback address
+  disable-link-bw-encoding-ieee  Disable IEEE floating-point encoding for extended community bandwidth
+  dont-capability-negotiate      Do not perform capability negotiation
+  ebgp-multihop                  Allow EBGP neighbors not on directly connected networks
+  enforce-first-as               Enforce the first AS for EBGP routes
+  enforce-multihop               Enforce EBGP neighbors perform multihop
+  extended-optional-parameters   Force the extended optional parameters format for OPEN messages
+  graceful-restart               Graceful Restart command for a neighbor
+  graceful-restart-disable       Graceful Restart Disable command for a neighbor
+  graceful-restart-helper        Graceful Restart Helper command for a neighbor
+  graceful-shutdown              Graceful shutdown
+  interface                      Interface
+  local-as                       Specify a local-as number
+  local-role                     Set session role
+  maximum-prefix-out             Maximum number of prefixes to be sent to this peer
+  override-capability            Override capability negotiation result
+  passive                        Don't send open messages to this neighbor
+  password                       Set a password
+  path-attribute                 Manipulate path attributes from incoming UPDATE messages
+  peer-group                     Member of the peer-group
+  port                           Neighbor's BGP port
+  remote-as                      Specify a BGP neighbor
+  sender-as-path-loop-detection  Detect AS loops before sending to neighbor
+  shutdown                       Administratively shut down this neighbor
+  solo                           Solo peer - part of its own update group
+  strict-capability-match        Strict capability negotiation match
+  tcp-mss                        TCP max segment size
+  timers                         BGP per neighbor timers
+  ttl-security                   BGP ttl-security parameters
+  update-source                  Source of routing updates
+CBL1(config-router)# neighbor 10.0.11.1 allowas-in
+CBL1(config-router)# end
+CBL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.11.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 11.11.11.11/32
+exit
+!
+router bgp 101
+ no bgp ebgp-requires-policy
+ neighbor 10.0.11.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+  neighbor 10.0.11.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL1# 
+CBL1# 
+CBL1# clear ip bgp * soft
+CBL1# 
+CBL1# 
+CBL1# 
+CBL1# 
+CBL1#      
+CBL1# 
+CBL1# 
+CBL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.11.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 11.11.11.11/32
+exit
+!
+router bgp 101
+ no bgp ebgp-requires-policy
+ neighbor 10.0.11.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+  neighbor 10.0.11.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL1# 
+CBL1# 
+CBL1# 
+CBL1# 
+CBL1# sh run
+Building configuration...
+
+Current configuration:
+!
+frr version 9.0.1_git
+frr defaults traditional
+hostname CBL1
+no ipv6 forwarding
+!
+interface eth1
+ ip address 10.0.11.2/30
+exit
+!
+interface eth2
+ ip address 172.16.1.1/24
+exit
+!
+interface lo
+ ip address 11.11.11.11/32
+exit
+!
+router bgp 101
+ no bgp ebgp-requires-policy
+ neighbor 10.0.11.1 remote-as 400
+ !
+ address-family ipv4 unicast
+  network 172.16.1.0/24
+  neighbor 10.0.11.1 allowas-in
+ exit-address-family
+exit
+!
+end
+CBL1# 
